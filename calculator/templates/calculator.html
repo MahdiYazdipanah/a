@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <title>ماشین حساب</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .input-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        input {
+            padding: 10px;
+            margin: 5px;
+            width: 100px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .operation-icon {
+            width: 30px;
+            font-size: 18px;
+            margin: 0 10px;
+        }
+        .result {
+            font-size: 20px;
+            color: #333;
+            margin-left: 10px;
+        }
+        .buttons {
+            margin-top: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .btn-add { background-color: #4CAF50; }
+        .btn-add:hover { background-color: #45a049; }
+        .btn-subtract { background-color: #f44336; }
+        .btn-subtract:hover { background-color: #da190b; }
+        .btn-multiply { background-color: #2196F3; }
+        .btn-multiply:hover { background-color: #0b7dda; }
+        .btn-divide { background-color: #FF9800; }
+        .btn-divide:hover { background-color: #e68a00; }
+        .btn-power { background-color: #9C27B0; }
+        .btn-power:hover { background-color: #7b1fa2; }
+        .btn-sqrt { background-color: #009688; }
+        .btn-sqrt:hover { background-color: #00796b; }
+        .btn-abs { background-color: #607D8B; }
+        .btn-abs:hover { background-color: #455a64; }
+        .btn-log { background-color: #E91E63; }
+        .btn-log:hover { background-color: #c2185b; }
+        .btn-factorial { background-color: #3F51B5; }
+        .btn-factorial:hover { background-color: #303f9f; }
+        .btn-sin { background-color: #FFC107; }
+        .btn-sin:hover { background-color: #ffa000; }
+        .btn-cos { background-color: #00BCD4; }
+        .btn-cos:hover { background-color: #0097a7; }
+        .btn-tan { background-color: #8BC34A; }
+        .btn-tan:hover { background-color: #689f38; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ماشین حساب</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="input-row">
+                <input type="number" name="num1" value="{{ num1|default:'' }}" placeholder="عدد اول" step="any" required>
+                <span class="operation-icon">{{ operation_icon|default:'' }}</span>
+                {% if show_num2 %}
+                    <input type="number" name="num2" value="{{ num2|default:'' }}" placeholder="عدد دوم" step="any" required>
+                {% else %}
+                    <input type="number" name="num2" style="display: none;">
+                {% endif %}
+                {% if result %}
+                    <span class="result">= {{ result }}</span>
+                {% endif %}
+            </div>
+            <div class="buttons">
+                <button class="btn-add" type="submit" name="operation" value="add">+</button>
+                <button class="btn-subtract" type="submit" name="operation" value="subtract">-</button>
+                <button class="btn-multiply" type="submit" name="operation" value="multiply">×</button>
+                <button class="btn-divide" type="submit" name="operation" value="divide">/</button>
+                <button class="btn-power" type="submit" name="operation" value="power">xⁿ</button>
+                <button class="btn-sqrt" type="submit" name="operation" value="sqrt">√</button>
+                <button class="btn-abs" type="submit" name="operation" value="abs">|x|</button>
+                <button class="btn-log" type="submit" name="operation" value="log">log₁₀</button>
+                <button class="btn-factorial" type="submit" name="operation" value="factorial">n!</button>
+                <button class="btn-sin" type="submit" name="operation" value="sin">sin</button>
+                <button class="btn-cos" type="submit" name="operation" value="cos">cos</button>
+                <button class="btn-tan" type="submit" name="operation" value="tan">tan</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
